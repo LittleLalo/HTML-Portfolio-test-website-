@@ -1,1 +1,160 @@
 
+/* Modern Glass Monochrome (Extra Transparent) */
+body {
+  background: linear-gradient(135deg, #dad8d8 0%, #282727 100%);
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Glass container */
+#weather-container {
+  background: rgba(208, 202, 202, 0.15); /* lowered opacity for more transparency */
+  width: min(92vw, 420px);
+  padding: 25px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px) saturate(150%);
+  -webkit-backdrop-filter: blur(15px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#weather-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Headings */
+h2 {
+  color: #111;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+h3 {
+  color: #333;
+  margin-top: 18px;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* Input & button layout */
+form {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  color: #111;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+input::placeholder {
+  color: #616161;
+}
+
+button {
+  background: rgba(33, 33, 33, 0.75);
+  color: #fff;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(4px);
+}
+
+button:hover {
+  background: rgba(66, 66, 66, 0.9);
+  transform: scale(1.05);
+}
+
+/* Temperature text */
+#temp-div p {
+  font-size: 60px;
+  font-weight: 500;
+  margin-top: 12px;
+  color: #111;
+}
+
+/* Weather details */
+#weather-info {
+  font-size: 20px;
+  margin-top: 5px;
+  color: #333;
+}
+
+/* Weather icon */
+#weather-icon {
+  width: 180px;
+  height: 180px;
+  margin: 10px auto 0;
+  display: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Hourly heading */
+#hourly-heading {
+  display: none;
+  font-weight: 600;
+  color: #212121;
+}
+
+/* Forecast container */
+#hourly-forecast {
+  margin-top: 14px;
+  overflow-x: auto;
+  display: flex;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+/* Forecast tiles */
+.hourly-item {
+  flex: 0 0 auto;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212121;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.hourly-item:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.hourly-item img {
+  width: 35px;
+  height: 35px;
+  margin: 4px 0;
+}
