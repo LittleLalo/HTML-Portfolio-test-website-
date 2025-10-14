@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="weather-container">
+    <h2>Weather App</h2>
+
+    <!-- form lets Enter key submit -->
+    <form id="weather-form">
+      <input type="text" id="city" placeholder="Enter city" autocomplete="off" />
+      <button type="submit">Search</button>
+    </form>
+
+    <img id="weather-icon" alt="Weather Icon" />
+
+    <div id="temp-div"></div>
+    <div id="weather-info"></div>
+
+    <h3 id="hourly-heading">Next 24 hours</h3>
+    <div id="hourly-forecast"></div>
+  </div>
+
+  <!-- Load your script; defer so DOM is ready -->
+  <script src="./script.js" defer></script>
+</body>
+</html>
