@@ -50,27 +50,38 @@ body{
   animation:float 5.2s ease-in-out infinite; will-change:transform,filter;
 }
 .card img{
-  width:100%; height:200px; object-fit:cover;
-  position:relative; z-index:1;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  overflow: hidden;
+  display: block;
 }
 
 /* Reflection under image */
 .card.is-active img::after {
-  content:"";
-  position:absolute;
-  bottom:-200px;
-  left:0;
-  width:100%;
-  height:200px;
-  background-image:inherit;
-  background-size:cover;
-  background-repeat:no-repeat;
-  transform:scaleY(-1);
-  opacity:0.25;
-  filter:blur(2px);
-  mask-image:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-  pointer-events:none;
+  content: "";
+  position: absolute;
+  bottom: -200px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  background-image: inherit;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scaleY(-1);
+  opacity: 0.25;
+  filter: blur(2px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
 }
 
 /* Frosted caption (glass) */
