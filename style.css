@@ -42,10 +42,10 @@ hr {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  height: 360px;
-  perspective: 1200px;
+  height: 380px;           /* space for float + pop-out */
+  perspective: 1200px;     /* 3D depth */
   display: grid;
-  place-items: center;
+  place-items: center;     /* front card centered visually */
 }
 
 .carousel {
@@ -60,7 +60,7 @@ hr {
 /* Project Card Styles */
 /* ---------------------- */
 .card {
-  position: absolute;
+  position: absolute;       /* faces of the 3D ring */
   width: 300px;
   height: 260px;
   background: var(--card-bg);
@@ -70,15 +70,16 @@ hr {
   text-align: center;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  opacity: 0.55;
+  opacity: 0.55;            /* non-front faces dimmer */
   transition:
     opacity .35s ease,
     transform .35s ease,
     box-shadow .35s ease,
     filter .35s ease;
+  --zboost: 0px;            /* JS will raise active card forward */
 }
 
-/* Inner wrapper for float animation */
+/* Inner wrapper for float (don’t touch 3D transforms) */
 .card-inner {
   position: relative;
   width: 100%;
@@ -106,11 +107,13 @@ hr {
   font-weight: 600;
   letter-spacing: .2px;
   border-radius: 12px;
+
   background: rgba(255, 255, 255, 0.28);
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 8px 24px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+
   transform: translateY(0);
   transition: opacity .35s ease, transform .35s ease;
   opacity: .9;
@@ -121,9 +124,7 @@ hr {
   transform: translateY(-2px);
 }
 
-.card:not(.active) .subtitle {
-  opacity: .75;
-}
+.card:not(.active) .subtitle { opacity: .75; }
 
 /* Floating floor shadow */
 .card::after {
@@ -142,7 +143,7 @@ hr {
   pointer-events: none;
 }
 
-/* Active front card */
+/* Active front card pops forward and brighter */
 .card.active {
   opacity: 1;
   filter: drop-shadow(0 12px 24px rgba(0,0,0,.22));
@@ -166,7 +167,7 @@ hr {
 .card:hover .card-inner,
 .card:hover::after { animation-play-state: paused; }
 
-/* Floating animation */
+/* Float animation */
 @keyframes floatY {
   0%, 100% { transform: translateY(0); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12)); }
   50%      { transform: translateY(-12px); filter: drop-shadow(0 14px 24px rgba(0,0,0,0.18)); }
@@ -217,8 +218,7 @@ a:hover { text-decoration: underline; }
   .arrow { font-size: 1.5rem; padding: 8px 10px; }
 }
 
-/* Accessibility: disable animation */
+/* Accessibility: reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .card-inner, .card::after { animation: none !important; }
 }
-
