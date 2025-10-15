@@ -1,13 +1,12 @@
-
 :root {
   --bg: #f4f4f4;
-  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-bg: rgba(255, 255, 255, 0.7);
   --text-main: #222;
   --text-sub: #555;
   --accent: #000;
   --shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   --radius: 16px;
-  --transition: 0.3s ease-in-out;
+  --transition: 0.4s ease-in-out;
 }
 
 * {
@@ -39,16 +38,88 @@ h2 {
   margin-bottom: 40px;
 }
 
-a img {
+hr {
+  width: 60%;
+  border: none;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 30px 0;
+}
+
+/* --- Carousel Styles --- */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel {
+  display: flex;
+  transition: transform var(--transition);
+  gap: 20px;
+}
+
+.card {
+  min-width: 300px;
+  text-align: center;
+  background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  margin: 15px;
+  overflow: hidden;
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-a img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card p {
+  margin: 10px 0;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: var(--card-bg);
+  border: none;
+  border-radius: 50%;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background var(--transition);
+  user-select: none;
+}
+
+.arrow:hover {
+  background: #fff;
+}
+
+.arrow.left {
+  left: 10px;
+}
+
+.arrow.right {
+  right: 10px;
+}
+
+/* --- Links --- */
+.links {
+  margin-top: 20px;
 }
 
 a {
@@ -61,21 +132,18 @@ a:hover {
   text-decoration: underline;
 }
 
-hr {
-  width: 60%;
-  border: none;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.2);
-  margin: 30px 0;
-}
-
 @media (max-width: 768px) {
   h1 {
     font-size: 2rem;
   }
 
-  a img {
-    width: 90%;
-    height: auto;
+  .card {
+    min-width: 260px;
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+    padding: 8px 10px;
   }
 }
+
