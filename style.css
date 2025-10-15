@@ -169,3 +169,38 @@ body{
   .card-inner, .card::after, .card.is-active::before{animation:none!important}
 }
 
+/* Frosted caption (glass) */
+.glass-caption {
+  justify-self: center;
+  margin: 10px 0 12px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14),
+              inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  opacity: 0.9;
+  max-width: 280px;
+}
+
+.glass-caption .title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.glass-caption .desc {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.card.is-active .glass-caption {
+  opacity: 1;
+  transform: translateY(-4px);
+}
