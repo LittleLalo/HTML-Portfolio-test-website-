@@ -109,5 +109,3 @@ body{
 @media (prefers-reduced-motion:reduce){
   .card-inner, .card::after{animation:none!important}
 }
-
-
