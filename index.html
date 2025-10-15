@@ -1,33 +1,69 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8" />
-    <title>Eduardo Contreras</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <title>Eduardo Contreras</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <h1>Eduardo Contreras's Portfolio</h1>
-    <h2>This is my first ever main project!</h2>
-    <hr />
+  <h1>Eduardo Contreras's Portfolio</h1>
+  <h2>This is my first ever main project!</h2>
+  <hr />
 
-    <a href="./public/html/movie-ranking.html">
-        <img src="./assets/images/movie.png" height="200" alt="Movie Ranking Project">
-    </a>
+  <div class="carousel-container">
+    <button class="arrow left" id="prev">&#10094;</button>
 
-    <a href="./public/html/birthday-invite.html">
-        <img src="./assets/images/birthday.png" height="200" alt="Birthday Invite Project">
-    </a>
+    <div class="carousel" id="carousel">
+      <a href="./public/html/movie-ranking.html" class="card">
+        <img src="./assets/images/movie.png" alt="Movie Ranking Project">
+        <p>Movie Ranking</p>
+      </a>
 
-    <a href="./public/html/weather-app.html">
-        <img src="./assets/images/Weather-app.png" height="200" alt="Weather App Project">
-    </a>
+      <a href="./public/html/birthday-invite.html" class="card">
+        <img src="./assets/images/birthday.png" alt="Birthday Invite Project">
+        <p>Birthday Invite</p>
+      </a>
 
-    <hr />
+      <a href="./public/html/weather-app.html" class="card">
+        <img src="./assets/images/Weather-app.png" alt="Weather App Project">
+        <p>Weather App</p>
+      </a>
+    </div>
 
+    <button class="arrow right" id="next">&#10095;</button>
+  </div>
+
+  <hr />
+
+  <div class="links">
     <a href="./public/html/about.html">About Me</a> |
     <a href="./public/html/contact.html">Contact Me</a>
+  </div>
 
+  <script>
+    const carousel = document.getElementById('carousel');
+    const next = document.getElementById('next');
+    const prev = document.getElementById('prev');
+
+    let index = 0;
+    const cards = document.querySelectorAll('.card');
+    const total = cards.length;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(${-index * 320}px)`;
+    }
+
+    next.addEventListener('click', () => {
+      index = (index + 1) % total;
+      updateCarousel();
+    });
+
+    prev.addEventListener('click', () => {
+      index = (index - 1 + total) % total;
+      updateCarousel();
+    });
+  </script>
 </body>
 </html>
 
