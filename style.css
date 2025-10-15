@@ -25,6 +25,7 @@ body {
   text-align: center;
   min-height: 100vh;
   padding: 40px 20px;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -46,7 +47,9 @@ hr {
   margin: 30px 0;
 }
 
-/* --- 3D Carousel --- */
+/* ---------------------- */
+/* 3D Carousel Container */
+/* ---------------------- */
 .carousel-container {
   position: relative;
   width: 100%;
@@ -66,6 +69,9 @@ hr {
   transition: transform var(--transition);
 }
 
+/* ---------------------- */
+/* Project Card Styles */
+/* ---------------------- */
 .card {
   position: absolute;
   width: 300px;
@@ -75,22 +81,80 @@ hr {
   box-shadow: var(--shadow);
   overflow: hidden;
   text-align: center;
-  transition: transform var(--transition), opacity var(--transition);
+  transform-style: preserve-3d;
 }
 
-.card img {
+/* Inner wrapper for animation */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  animation: floatY 4.8s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+/* Card image & text */
+.card-inner img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.card p {
+.card-inner p {
   margin: 10px 0;
   font-weight: 500;
   color: var(--text-main);
 }
 
-/* Arrows */
+/* Subtle shadow under floating cards */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 70%;
+  height: 20px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,0.22), rgba(0,0,0,0));
+  filter: blur(6px);
+  opacity: 0.55;
+  animation: shadowPulse 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Staggered animation timing */
+.card:nth-child(1) .card-inner { animation-duration: 5.2s; animation-delay: .0s; }
+.card:nth-child(1)::after        { animation-duration: 5.2s; animation-delay: .0s; }
+
+.card:nth-child(2) .card-inner { animation-duration: 4.8s; animation-delay: .25s; }
+.card:nth-child(2)::after        { animation-duration: 4.8s; animation-delay: .25s; }
+
+.card:nth-child(3) .card-inner { animation-duration: 5.6s; animation-delay: .4s; }
+.card:nth-child(3)::after        { animation-duration: 5.6s; animation-delay: .4s; }
+
+/* Pause animation when hovered */
+.card:hover .card-inner,
+.card:hover::after {
+  animation-play-state: paused;
+}
+
+/* Floating animation keyframes */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12)); }
+  50%      { transform: translateY(-12px); filter: drop-shadow(0 14px 24px rgba(0,0,0,0.18)); }
+}
+
+@keyframes shadowPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.55; }
+  50%      { transform: translateX(-50%) scale(0.9); opacity: 0.4; }
+}
+
+/* ---------------------- */
+/* Navigation Arrows */
+/* ---------------------- */
 .arrow {
   position: absolute;
   top: 50%;
@@ -119,7 +183,9 @@ hr {
   right: 10px;
 }
 
-/* --- Links --- */
+/* ---------------------- */
+/* Footer Links */
+/* ---------------------- */
 .links {
   margin-top: 20px;
 }
@@ -134,6 +200,9 @@ a:hover {
   text-decoration: underline;
 }
 
+/* ---------------------- */
+/* Responsive */
+/* ---------------------- */
 @media (max-width: 768px) {
   h1 {
     font-size: 2rem;
@@ -147,5 +216,12 @@ a:hover {
   .arrow {
     font-size: 1.5rem;
     padding: 8px 10px;
+  }
+}
+
+/* Accessibility: disable animation for reduced motion users */
+@media (prefers-reduced-motion: reduce) {
+  .card-inner, .card::after {
+    animation: none !important;
   }
 }
