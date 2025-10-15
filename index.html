@@ -2,38 +2,51 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movie Ranking | Eduardo Contreras</title>
-  <link rel="stylesheet" href="../css/project-style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eduardo Contreras</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <main class="project-card">
-    <h1>According to Eduardo Contreras</h1>
-    <hr />
+  <header class="page-header">
+    <h1>Eduardo Contreras's Portfolio</h1>
+    <h2 class="subtitle-top">This is my first ever main project!</h2>
+  </header>
 
-    <!-- Project image -->
-    <img src="../../assets/images/movie.png" alt="Movie Ranking preview" />
+  <section class="coverflow-wrap" aria-roledescription="carousel">
+    <button class="nav prev" id="prev" aria-label="Previous project">❮</button>
 
-    <!-- What you learned -->
-    <h2>What I learned</h2>
-    <p>
-      This was my introduction to <strong>HTML</strong> — it laid the foundation for understanding
-      page structure, headings, lists, and links. It’s the project that built my core web basics.
-    </p>
+    <div class="stage" id="stage" aria-live="polite">
+      <!-- Each card: only the center is fully clickable; side cards bring themselves to center on click -->
+      <a href="./public/html/movie-ranking.html" class="card" data-title="Movie Ranking">
+        <div class="card-inner">
+          <img src="./assets/images/movie.png" alt="Movie Ranking preview" />
+          <div class="glass-caption">Movie Ranking</div>
+        </div>
+      </a>
 
-    <!-- Original project content (example; keep/edit yours here) -->
-    <h2>Top Movies</h2>
+      <a href="./public/html/birthday-invite.html" class="card" data-title="Birthday Invite">
+        <div class="card-inner">
+          <img src="./assets/images/birthday.png" alt="Birthday Invite preview" />
+          <div class="glass-caption">Birthday Invite</div>
+        </div>
+      </a>
 
-    <h3>Companion</h3>
-    <p>A great movie with a twist!</p>
+      <a href="./public/html/weather-app.html" class="card" data-title="Weather App">
+        <div class="card-inner">
+          <img src="./assets/images/Weather-app.png" alt="Weather App preview" />
+          <div class="glass-caption">Weather App</div>
+        </div>
+      </a>
+    </div>
 
-    <h3>Five Nights at Freddy’s 2</h3>
-    <p>The movie isn’t even out yet, but I know it’ll be a banger!</p>
+    <button class="nav next" id="next" aria-label="Next project">❯</button>
+  </section>
 
-    <h3>A Minecraft Movie</h3>
-    <p>A movie about Minecraft?! What could go wrong…</p>
+  <footer class="page-footer">
+    <a href="./public/html/about.html">About Me</a> |
+    <a href="./public/html/contact.html">Contact Me</a>
+  </footer>
 
-    <a class="back" href="../../index.html">← Back to Home</a>
-  </main>
+  <script src="./script.js"></script>
 </body>
 </html>
