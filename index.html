@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eduardo Contreras</title>
   <link rel="stylesheet" href="./style.css">
 </head>
@@ -11,23 +12,30 @@
   <h2>This is my first ever main project!</h2>
   <hr />
 
+  <!-- 3D Carousel Container -->
   <div class="carousel-container">
     <button class="arrow left" id="prev">&#10094;</button>
 
     <div class="carousel" id="carousel">
       <a href="./public/html/movie-ranking.html" class="card">
-        <img src="./assets/images/movie.png" alt="Movie Ranking Project">
-        <p>Movie Ranking</p>
+        <div class="card-inner">
+          <img src="./assets/images/movie.png" alt="Movie Ranking Project">
+          <p>Movie Ranking</p>
+        </div>
       </a>
 
       <a href="./public/html/birthday-invite.html" class="card">
-        <img src="./assets/images/birthday.png" alt="Birthday Invite Project">
-        <p>Birthday Invite</p>
+        <div class="card-inner">
+          <img src="./assets/images/birthday.png" alt="Birthday Invite Project">
+          <p>Birthday Invite</p>
+        </div>
       </a>
 
       <a href="./public/html/weather-app.html" class="card">
-        <img src="./assets/images/Weather-app.png" alt="Weather App Project">
-        <p>Weather App</p>
+        <div class="card-inner">
+          <img src="./assets/images/Weather-app.png" alt="Weather App Project">
+          <p>Weather App</p>
+        </div>
       </a>
     </div>
 
@@ -41,9 +49,8 @@
     <a href="./public/html/contact.html">Contact Me</a>
   </div>
 
+  <!-- JS handles rotation logic -->
   <script src="./script.js"></script>
 </body>
 </html>
-
-
 
