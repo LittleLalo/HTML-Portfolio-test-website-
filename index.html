@@ -41,29 +41,7 @@
     <a href="./public/html/contact.html">Contact Me</a>
   </div>
 
-  <script>
-    const carousel = document.getElementById('carousel');
-    const next = document.getElementById('next');
-    const prev = document.getElementById('prev');
-
-    let index = 0;
-    const cards = document.querySelectorAll('.card');
-    const total = cards.length;
-
-    function updateCarousel() {
-      carousel.style.transform = `translateX(${-index * 320}px)`;
-    }
-
-    next.addEventListener('click', () => {
-      index = (index + 1) % total;
-      updateCarousel();
-    });
-
-    prev.addEventListener('click', () => {
-      index = (index - 1 + total) % total;
-      updateCarousel();
-    });
-  </script>
+  <script src="./script.js"></script>
 </body>
 </html>
 
