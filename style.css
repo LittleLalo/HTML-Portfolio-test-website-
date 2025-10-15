@@ -42,11 +42,10 @@ hr {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  height: 340px;           /* a little taller for float */
-  perspective: 1200px;     /* 3D depth */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 360px;
+  perspective: 1200px;
+  display: grid;
+  place-items: center;
 }
 
 .carousel {
@@ -61,7 +60,7 @@ hr {
 /* Project Card Styles */
 /* ---------------------- */
 .card {
-  position: absolute;       /* positioned as faces of the 3D ring */
+  position: absolute;
   width: 300px;
   height: 260px;
   background: var(--card-bg);
@@ -71,7 +70,7 @@ hr {
   text-align: center;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  opacity: 0.55;            /* side/back faces dimmer */
+  opacity: 0.55;
   transition:
     opacity .35s ease,
     transform .35s ease,
@@ -79,7 +78,7 @@ hr {
     filter .35s ease;
 }
 
-/* Inner wrapper for floating animation (keeps JS transforms intact) */
+/* Inner wrapper for float animation */
 .card-inner {
   position: relative;
   width: 100%;
@@ -90,20 +89,43 @@ hr {
   will-change: transform, filter;
 }
 
-/* Image & text */
+/* Image */
 .card-inner img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.card-inner p {
-  margin: 10px 0;
-  font-weight: 500;
+/* Glass subtitle */
+.subtitle {
+  margin: 0 auto 10px;
+  padding: 8px 14px;
+  width: max-content;
+  max-width: calc(100% - 20px);
   color: var(--text-main);
+  font-weight: 600;
+  letter-spacing: .2px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translateY(0);
+  transition: opacity .35s ease, transform .35s ease;
+  opacity: .9;
 }
 
-/* Floating floor shadow to sell the levitation effect */
+.card.active .subtitle {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.card:not(.active) .subtitle {
+  opacity: .75;
+}
+
+/* Floating floor shadow */
 .card::after {
   content: "";
   position: absolute;
@@ -120,18 +142,17 @@ hr {
   pointer-events: none;
 }
 
-/* Front (active) face pops a bit */
+/* Active front card */
 .card.active {
   opacity: 1;
   filter: drop-shadow(0 12px 24px rgba(0,0,0,.22));
-  transform: translateZ(0) scale(1.04); /* subtle pop */
+  transform: translateZ(0) scale(1.04);
 }
 
-/* Non-front faces slightly smaller for depth */
 .card:not(.active) .card-inner { transform: scale(.965); }
 .card.active .card-inner { transform: none; }
 
-/* Stagger float timings so cards don't sway in sync */
+/* Stagger float timings */
 .card:nth-child(1) .card-inner { animation-duration: 5.2s; animation-delay: .0s; }
 .card:nth-child(1)::after      { animation-duration: 5.2s; animation-delay: .0s; }
 
@@ -141,11 +162,11 @@ hr {
 .card:nth-child(3) .card-inner { animation-duration: 5.6s; animation-delay: .4s; }
 .card:nth-child(3)::after      { animation-duration: 5.6s; animation-delay: .4s; }
 
-/* Pause animation on hover for easier clicking */
+/* Pause animation on hover */
 .card:hover .card-inner,
 .card:hover::after { animation-play-state: paused; }
 
-/* Float animation */
+/* Floating animation */
 @keyframes floatY {
   0%, 100% { transform: translateY(0); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12)); }
   50%      { transform: translateY(-12px); filter: drop-shadow(0 14px 24px rgba(0,0,0,0.18)); }
@@ -196,7 +217,7 @@ a:hover { text-decoration: underline; }
   .arrow { font-size: 1.5rem; padding: 8px 10px; }
 }
 
-/* Accessibility: reduce motion */
+/* Accessibility: disable animation */
 @media (prefers-reduced-motion: reduce) {
   .card-inner, .card::after { animation: none !important; }
 }
