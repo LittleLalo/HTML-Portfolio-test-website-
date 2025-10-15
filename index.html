@@ -2,53 +2,52 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Eduardo Contreras</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
-  <h1>Eduardo Contreras's Portfolio</h1>
-  <h2>This is my first ever main project!</h2>
-  <hr />
+  <header class="page-header">
+    <h1>Eduardo Contreras's Portfolio</h1>
+    <h2 class="subtitle-top">This is my first ever main project!</h2>
+  </header>
 
-  <!-- 3D Carousel Container -->
-  <div class="carousel-container">
-    <button class="arrow left" id="prev" aria-label="Previous project">&#10094;</button>
+  <section class="coverflow-wrap" aria-roledescription="carousel">
+    <button class="nav prev" id="prev" aria-label="Previous project">❮</button>
 
-    <div class="carousel" id="carousel">
-      <a href="./public/html/movie-ranking.html" class="card">
+    <div class="stage" id="stage" aria-live="polite">
+      <!-- Each card: only the center is fully clickable; side cards bring themselves to center on click -->
+      <a href="./public/html/movie-ranking.html" class="card" data-title="Movie Ranking">
         <div class="card-inner">
-          <img src="./assets/images/movie.png" alt="Movie Ranking Project">
-          <div class="subtitle">Movie Ranking</div>
+          <img src="./assets/images/movie.png" alt="Movie Ranking preview" />
+          <div class="glass-caption">Movie Ranking</div>
         </div>
       </a>
 
-      <a href="./public/html/birthday-invite.html" class="card">
+      <a href="./public/html/birthday-invite.html" class="card" data-title="Birthday Invite">
         <div class="card-inner">
-          <img src="./assets/images/birthday.png" alt="Birthday Invite Project">
-          <div class="subtitle">Birthday Invite</div>
+          <img src="./assets/images/birthday.png" alt="Birthday Invite preview" />
+          <div class="glass-caption">Birthday Invite</div>
         </div>
       </a>
 
-      <a href="./public/html/weather-app.html" class="card">
+      <a href="./public/html/weather-app.html" class="card" data-title="Weather App">
         <div class="card-inner">
-          <img src="./assets/images/Weather-app.png" alt="Weather App Project">
-          <div class="subtitle">Weather App</div>
+          <img src="./assets/images/Weather-app.png" alt="Weather App preview" />
+          <div class="glass-caption">Weather App</div>
         </div>
       </a>
     </div>
 
-    <button class="arrow right" id="next" aria-label="Next project">&#10095;</button>
-  </div>
+    <button class="nav next" id="next" aria-label="Next project">❯</button>
+  </section>
 
-  <hr />
-
-  <div class="links">
+  <footer class="page-footer">
     <a href="./public/html/about.html">About Me</a> |
     <a href="./public/html/contact.html">Contact Me</a>
-  </div>
+  </footer>
 
   <script src="./script.js"></script>
 </body>
 </html>
+
