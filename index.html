@@ -1,53 +1,45 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Eduardo Contreras</title>
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <header class="page-header">
-    <h1>Eduardo Contreras's Portfolio</h1>
-    <h2 class="subtitle-top">This is my first ever main project!</h2>
-  </header>
+<div class="carousel-container">
+  <button class="arrow left" id="prev">&#10094;</button>
 
-  <section class="coverflow-wrap" aria-roledescription="carousel">
-    <button class="nav prev" id="prev" aria-label="Previous project">❮</button>
+  <div class="carousel" id="carousel">
 
-    <div class="stage" id="stage" aria-live="polite">
-      <!-- Each card: only the center is fully clickable; side cards bring themselves to center on click -->
-      <a href="./public/html/movie-ranking.html" class="card" data-title="Movie Ranking">
-        <div class="card-inner">
-          <img src="./assets/images/movie.png" alt="Movie Ranking preview" />
-          <div class="glass-caption">Movie Ranking</div>
+    <a href="./public/html/movie-ranking.html" class="card">
+      <div class="card-inner">
+        <img src="./assets/images/movie.png" alt="Movie Ranking Project">
+        <div class="glass-caption">
+          <p class="title">Movie Ranking</p>
+          <p class="desc">
+            My introduction to HTML — this project laid the foundation for understanding basic structure and webpage design.
+          </p>
         </div>
-      </a>
+      </div>
+    </a>
 
-      <a href="./public/html/birthday-invite.html" class="card" data-title="Birthday Invite">
-        <div class="card-inner">
-          <img src="./assets/images/birthday.png" alt="Birthday Invite preview" />
-          <div class="glass-caption">Birthday Invite</div>
+    <a href="./public/html/birthday-invite.html" class="card">
+      <div class="card-inner">
+        <img src="./assets/images/birthday.png" alt="Birthday Invite Project">
+        <div class="glass-caption">
+          <p class="title">Birthday Invite</p>
+          <p class="desc">
+            This taught me how to make clickable links and include images, helping me design more interactive pages.
+          </p>
         </div>
-      </a>
+      </div>
+    </a>
 
-      <a href="./public/html/weather-app.html" class="card" data-title="Weather App">
-        <div class="card-inner">
-          <img src="./assets/images/Weather-app.png" alt="Weather App preview" />
-          <div class="glass-caption">Weather App</div>
+    <a href="./public/html/weather-app.html" class="card">
+      <div class="card-inner">
+        <img src="./assets/images/Weather-app.png" alt="Weather App Project">
+        <div class="glass-caption">
+          <p class="title">Weather App</p>
+          <p class="desc">
+            I learned to use APIs, CSS, and JavaScript to fetch live data and dynamically update my site — my biggest step forward.
+          </p>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
 
-    <button class="nav next" id="next" aria-label="Next project">❯</button>
-  </section>
+  </div>
 
-  <footer class="page-footer">
-    <a href="./public/html/about.html">About Me</a> |
-    <a href="./public/html/contact.html">Contact Me</a>
-  </footer>
-
-  <script src="./script.js"></script>
-</body>
-</html>
-
+  <button class="arrow right" id="next">&#10095;</button>
+</div>
