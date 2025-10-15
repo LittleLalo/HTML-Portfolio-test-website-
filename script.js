@@ -1,5 +1,6 @@
-// Coverflow carousel (like the video): center card front, sides angled back.
-// Controls: arrows, keyboard, click side to focus, drag/swipe.
+// Coverflow carousel: center card front, sides angled back & behind.
+// Fix: precise centering using stage size and card size (no CSS 50/50).
+// Includes arrows, keyboard, click-to-focus, and swipe/drag.
 
 const stage = document.getElementById('stage');
 const cards = Array.from(stage.querySelectorAll('.card'));
@@ -7,53 +8,57 @@ const btnPrev = document.getElementById('prev');
 const btnNext = document.getElementById('next');
 
 let index = 0;               // active index
-const gap = 220;             // horizontal spacing between slots (px)
-const tilt = 45;             // side tilt (deg)
-const depth = 140;           // how far back side cards go (px)
-const scaleStep = 0.1;       // scale reduction per step away from center
-const opacityStep = 0.18;    // opacity reduction per step away from center
-const maxVisible = 3;        // how many steps to layout (each side)
 
-// Layout at start
+// Tunables
+let gap = 220;               // horizontal spacing between slots (px)
+let tilt = 45;               // side tilt (deg)
+let depth = 140;             // Z depth for side cards (px)
+let scaleStep = 0.1;         // scale reduction per step away
+let opacityStep = 0.18;      // opacity reduction per step away
+const maxVisible = 3;        // steps laid out per side
+
 layout();
-updateActive();
 
+// Main layout pass
 function layout(){
-  // Center reference of the stage
-  const rect = stage.getBoundingClientRect();
-  const cx = rect.width / 2;
-  const cy = rect.height / 2;
+  const sw = stage.clientWidth;
+  const sh = stage.clientHeight;
 
   cards.forEach((card, i) => {
-    // relative position from active
+    // Use actual card dimensions for accurate centering
+    const cw = card.offsetWidth || 320;
+    const ch = card.offsetHeight || 260;
+
+    // Center (top-left) anchor for this card
+    const centerX = (sw - cw) / 2;
+    const centerY = (sh - ch) / 2;
+
+    // relative index from active, wrapped shortest-path
     let d = i - index;
-    // wrap shortest direction
     if (d > cards.length/2) d -= cards.length;
     if (d < -cards.length/2) d += cards.length;
 
     const ad = Math.abs(d);
 
     if (ad > maxVisible){
-      // Park very far & hide (still slightly visible behind if needed)
-      card.style.transform = `translate3d(${cx}px, ${cy}px, -800px)`;
+      // park far back & hide
+      card.style.transform = `translate3d(${centerX}px, ${centerY}px, -800px)`;
       card.style.opacity = 0;
       card.style.pointerEvents = 'none';
       card.classList.remove('is-active');
       return;
     }
 
-    const x = cx + d * gap;
-    const z = -ad * depth + (ad === 0 ? 120 : 0); // center pops forward
+    // position across X, centered vertically, with Z & rotation for coverflow
+    const x  = centerX + d * gap;
+    const z  = -ad * depth + (ad === 0 ? 140 : 0); // pop center forward
     const ry = d === 0 ? 0 : (-Math.sign(d) * tilt);
-
-    const s = 1 - ad * scaleStep;
+    const s  = 1 - ad * scaleStep;
     const op = Math.max(0.15, 1 - ad * opacityStep);
 
-    card.style.transform =
-      `translate3d(${x}px, ${cy}px, ${z}px) rotateY(${ry}deg) scale(${s})`;
-
-    card.style.opacity = op;
-    card.style.zIndex = 1000 - ad; // front layered
+    card.style.transform = `translate3d(${x}px, ${centerY}px, ${z}px) rotateY(${ry}deg) scale(${s})`;
+    card.style.opacity   = op;
+    card.style.zIndex    = 1000 - ad;
 
     const isActive = (ad === 0);
     card.classList.toggle('is-active', isActive);
@@ -61,20 +66,15 @@ function layout(){
   });
 }
 
-// Helpers
 function mod(n, m){ return ((n % m) + m) % m; }
-function next(){ index = mod(index + 1, cards.length); layout(); updateActive(); }
-function prev(){ index = mod(index - 1, cards.length); layout(); updateActive(); }
+function next(){ index = mod(index + 1, cards.length); layout(); }
+function prev(){ index = mod(index - 1, cards.length); layout(); }
 
-function updateActive(){
-  // update aria-labels if you want; visual state already handled by classes
-}
-
-// Click: side card brings itself to center
+// Click side to focus (don’t navigate if not active)
 cards.forEach((card, i) => {
   card.addEventListener('click', (e) => {
-    if (i === index) return; // already active; allow normal navigation
-    e.preventDefault();      // prevent navigating when not active
+    if (i === index) return; // center card—follow link normally
+    e.preventDefault();
     index = i;
     layout();
   });
@@ -97,9 +97,7 @@ const dragMove  = (x) => { if (!dragging) return; deltaX = x - startX; };
 const dragEnd   = () => {
   if (!dragging) return;
   dragging = false;
-  if (Math.abs(deltaX) > 40){
-    if (deltaX < 0) next(); else prev();
-  }
+  if (Math.abs(deltaX) > 40){ (deltaX < 0) ? next() : prev(); }
 };
 
 stage.addEventListener('mousedown', (e)=>dragStart(e.clientX));
@@ -110,5 +108,10 @@ stage.addEventListener('touchstart', (e)=>dragStart(e.touches[0].clientX), {pass
 stage.addEventListener('touchmove',  (e)=>dragMove(e.touches[0].clientX),  {passive:true});
 stage.addEventListener('touchend', dragEnd);
 
-// Re-center on resize
-window.addEventListener('resize', layout);
+// Responsive tweaks & re-center on resize
+window.addEventListener('resize', () => {
+  const small = stage.clientWidth < 640;
+  gap   = small ? 180 : 220;
+  depth = small ? 120 : 140;
+  layout();
+});
